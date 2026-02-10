@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Proposal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6f2;
+            color: #333;
+            margin: 0;
+            padding: 50px;
+            transition: background-color 0.5s;
+        }
+        .page {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, font-size 0.3s;
+        }
+        #yesBtn {
+            background-color: #ff69b4;
+            color: white;
+        }
+        #noBtn {
+            background-color: #ccc;
+            color: #333;
+        }
+        #yesBtn:hover {
+            background-color: #ff1493;
+        }
+        #noBtn:hover {
+            background-color: #aaa;
+        }
+        .final {
+            font-size: 2.5em;
+            color: #ff69b4;
+        }
+    </style>
+</head>
+<body>
+    <div id="page1" class="page active">
+        <h1>Can we please talk about this?</h1>
+        <div class="buttons">
+            <button id="yesBtn1">Yes</button>
+            <button id="noBtn1">No</button>
+        </div>
+    </div>
+    
+    <div id="page2" class="page">
+        <h1>Please be my valentine</h1>
+        <div class="buttons">
+            <button id="yesBtn2">Yes</button>
+            <button id="noBtn2">No</button>
+        </div>
+    </div>
+    
+    <div id="finalPage" class="page">
+        <h1 class="final">Yay! You said yes! ❤️</h1>
+    </div>
+
+    <script>
+        let yesScale1 = 1;
+        let yesScale2 = 1;
+
+        // Page 1 interactions
+        document.getElementById('noBtn1').addEventListener('click', function() {
+            yesScale1 += 0.2;
+            document.getElementById('yesBtn1').style.transform = `scale(${yesScale1})`;
+        });
+
+        document.getElementById('yesBtn1').addEventListener('click', function() {
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.add('active');
+        });
+
+        // Page 2 interactions
+        document.getElementById('noBtn2').addEventListener('click', function() {
+            yesScale2 += 0.2;
+            document.getElementById('yesBtn2').style.transform = `scale(${yesScale2})`;
+        });
+
+        document.getElementById('yesBtn2').addEventListener('click', function() {
+            document.getElementById('page2').classList.remove('active');
+            document.getElementById('finalPage').classList.add('active');
+        });
+    </script>
+</body>
+</html>
