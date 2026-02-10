@@ -6,13 +6,14 @@
     <title>Valentine Proposal</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
-            background-color: #ffe6f2;
-            color: #333;
+            background-color: #000; /* Changed to black */
+            color: #fff; /* White text for contrast */
             margin: 0;
             padding: 50px;
             transition: background-color 0.5s;
+            overflow: hidden; /* Prevent scroll during animations */
         }
         .page {
             display: none;
@@ -21,40 +22,67 @@
             display: block;
         }
         h1 {
-            font-size: 2em;
-            margin-bottom: 30px;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px #ff69b4; /* Pink glow for valentine vibe */
         }
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             flex-wrap: wrap;
         }
         button {
-            padding: 15px 30px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 10px;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            border: 2px solid #ff69b4; /* Pink border */
+            border-radius: 15px;
             cursor: pointer;
-            transition: transform 0.3s, font-size 0.3s;
+            transition: transform 0.3s, font-size 0.3s, background-color 0.3s, box-shadow 0.3s;
+            background-color: #333; /* Dark button background */
+            color: #fff;
         }
         #yesBtn {
-            background-color: #ff69b4;
+            background-color: #ff69b4; /* Pink for Yes */
             color: white;
+            box-shadow: 0 0 10px #ff69b4;
         }
         #noBtn {
-            background-color: #ccc;
-            color: #333;
+            background-color: #666; /* Gray for No */
+            color: #ccc;
         }
         #yesBtn:hover {
             background-color: #ff1493;
+            box-shadow: 0 0 15px #ff1493;
+            transform: scale(1.05);
         }
         #noBtn:hover {
-            background-color: #aaa;
+            background-color: #888;
+            transform: scale(1.05);
         }
         .final {
-            font-size: 2.5em;
+            font-size: 3em;
             color: #ff69b4;
+            text-shadow: 0 0 20px #ff69b4;
+            animation: pulse 1s infinite; /* Pulsing effect */
+        }
+        /* Heart animation styles */
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            color: #ff69b4;
+            animation: float 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            50% { transform: translateY(50vh) scale(1); opacity: 0.8; }
+            100% { transform: translateY(0) scale(0); opacity: 0; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -101,9 +129,29 @@
         });
 
         document.getElementById('yesBtn2').addEventListener('click', function() {
-            document.getElementById('page2').classList.remove('active');
-            document.getElementById('finalPage').classList.add('active');
+            // Trigger heart animation before transitioning
+            createHearts();
+            setTimeout(() => {
+                document.getElementById('page2').classList.remove('active');
+                document.getElementById('finalPage').classList.add('active');
+            }, 500); // Short delay for animation effect
         });
+
+        // Function to create floating hearts
+        function createHearts() {
+            for (let i = 0; i < 10; i++) { // Create 10 hearts
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+                heart.style.animationDelay = Math.random() * 2 + 's'; // Stagger animations
+                document.body.appendChild(heart);
+                // Remove heart after animation
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+        }
     </script>
 </body>
 </html>
